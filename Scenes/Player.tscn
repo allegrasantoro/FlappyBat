@@ -1,0 +1,42 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Assets/Player/Default/bat_default.png" type="Texture" id=1]
+[ext_resource path="res://Scripts/Player.gd" type="Script" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 378.891, 216.621 )
+
+[sub_resource type="Animation" id=2]
+resource_name = "flap"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("SpritePlayer:frame")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 1, 0 ]
+}
+
+[node name="PlayerNode" type="Node2D"]
+position = Vector2( 389.773, 224.253 )
+scale = Vector2( 0.240807, 0.240807 )
+
+[node name="Player" type="KinematicBody2D" parent="."]
+script = ExtResource( 2 )
+
+[node name="CollisionShapePlayer" type="CollisionShape2D" parent="Player"]
+position = Vector2( 518.766, 266.332 )
+shape = SubResource( 1 )
+
+[node name="SpritePlayer" type="Sprite" parent="Player"]
+position = Vector2( 526.647, 446.012 )
+texture = ExtResource( 1 )
+vframes = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Player"]
+anims/flap = SubResource( 2 )
