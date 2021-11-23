@@ -1,0 +1,60 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Assets/Obstacles/obstacle_3.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Obstacles/obstacle_5.png" type="Texture" id=2]
+[ext_resource path="res://Scripts/Walls.gd" type="Script" id=3]
+
+[sub_resource type="OccluderPolygon2D" id=1]
+polygon = PoolVector2Array( 119.998, 604.166, 257.843, 601.169, 190.419, 237.081 )
+
+[sub_resource type="OccluderPolygon2D" id=2]
+polygon = PoolVector2Array( 135.266, 596.071, 230.018, 597.485, 183.349, 529.603 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 6.52039, 97.8637 )
+
+[node name="Wall3Node" type="Node2D" groups=[
+"Obstancles",
+]]
+script = ExtResource( 3 )
+
+[node name="Wall3" type="StaticBody2D" parent="." groups=[
+"Obstacles",
+]]
+
+[node name="UpSprite" type="Sprite" parent="Wall3"]
+position = Vector2( 2.99667, 365.674 )
+scale = Vector2( 0.261671, 0.320297 )
+texture = ExtResource( 1 )
+
+[node name="UpPolygon" type="CollisionPolygon2D" parent="Wall3"]
+position = Vector2( 0, 534.573 )
+polygon = PoolVector2Array( -65.1794, 69.5089, 72.6648, 71.0072, -0.752258, -299.075 )
+
+[node name="UpLightOccluder2D" type="LightOccluder2D" parent="Wall3"]
+position = Vector2( -186.676, 1.41418 )
+occluder = SubResource( 1 )
+
+[node name="DownSprite" type="Sprite" parent="Wall3"]
+position = Vector2( 0, 127.735 )
+scale = Vector2( 0.169467, 0.169467 )
+texture = ExtResource( 2 )
+flip_v = true
+
+[node name="DownPolygon" type="CollisionPolygon2D" parent="Wall3"]
+position = Vector2( 0, 66.468 )
+rotation = 3.14159
+polygon = PoolVector2Array( -48.5818, 62.9119, 43.3421, 64.326, -1.9127, -6.38464 )
+
+[node name="DownLightOccluder2D" type="LightOccluder2D" parent="Wall3"]
+position = Vector2( 183.167, 599.36 )
+rotation = 3.14159
+occluder = SubResource( 2 )
+
+[node name="Area2D" type="Area2D" parent="Wall3" groups=[
+"passPoint",
+]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall3/Area2D"]
+position = Vector2( -0.570984, 155.063 )
+shape = SubResource( 3 )

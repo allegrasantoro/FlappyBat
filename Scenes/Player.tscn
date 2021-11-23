@@ -1,10 +1,7 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Assets/Player/Default/bat_default.png" type="Texture" id=1]
 [ext_resource path="res://Scripts/Player.gd" type="Script" id=2]
-
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 378.891, 216.621 )
 
 [sub_resource type="Animation" id=2]
 resource_name = "flap"
@@ -29,14 +26,23 @@ scale = Vector2( 0.240807, 0.240807 )
 [node name="Player" type="KinematicBody2D" parent="."]
 script = ExtResource( 2 )
 
-[node name="CollisionShapePlayer" type="CollisionShape2D" parent="Player"]
-position = Vector2( 518.766, 266.332 )
-shape = SubResource( 1 )
-
 [node name="SpritePlayer" type="Sprite" parent="Player"]
 position = Vector2( 526.647, 446.012 )
 texture = ExtResource( 1 )
 vframes = 2
+frame = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Player"]
 anims/flap = SubResource( 2 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Player"]
+visible = false
+polygon = PoolVector2Array( 452.198, 300.189, 499.181, 458.755, 522.672, 488.119, 651.874, 492.523, 698.856, 444.073, 691.515, 279.634, 622.51, 353.044, 553.504, 350.108, 500.649, 294.316 )
+
+[node name="Area2D" type="Area2D" parent="Player"]
+
+[node name="DetectInterractionsPolygon" type="CollisionPolygon2D" parent="Player/Area2D"]
+polygon = PoolVector2Array( 462.476, 304.594, 496.244, 448.477, 521.204, 482.246, 646.001, 491.055, 695.92, 439.668, 694.452, 275.229, 612.232, 363.322, 550.568, 342.767, 481.562, 285.507 )
+
+[connection signal="area_entered" from="Player/Area2D" to="Player" method="_on_Area2D_area_entered"]
+[connection signal="body_entered" from="Player/Area2D" to="Player" method="_on_Area2D_body_entered"]

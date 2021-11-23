@@ -18,9 +18,10 @@ func _physics_process(delta):
 	move_and_slide(velocity, Vector2.UP)
 
 func manage_gravity():
-	velocity.y += GRAVITY
-	if velocity.y > MAX_FALL_SPEED:
-		velocity.y = MAX_FALL_SPEED
+	velocity.y = min(MAX_FALL_SPEED, velocity.y + GRAVITY)
+	#velocity.y += GRAVITY
+	#if velocity.y > MAX_FALL_SPEED:
+	#	velocity.y = MAX_FALL_SPEED
 
 func manage_flap():
 	if Input.is_action_just_pressed("flap"):
